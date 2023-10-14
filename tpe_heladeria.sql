@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-09-2023 a las 20:26:23
+-- Tiempo de generación: 14-10-2023 a las 03:12:50
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -24,78 +24,160 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `datos_producto`
+-- Estructura de tabla para la tabla `categorias`
 --
 
-CREATE TABLE `datos_producto` (
-  `id` int(11) NOT NULL,
-  `producto` varchar(255) NOT NULL,
-  `categoria` varchar(255) NOT NULL,
-  `precio` double NOT NULL,
-  `cliente` int(11) NOT NULL
+CREATE TABLE `categorias` (
+  `id_categoria` int(11) NOT NULL,
+  `nombre_categoria` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `datos_producto`
+-- Volcado de datos para la tabla `categorias`
 --
 
-INSERT INTO `datos_producto` (`id`, `producto`, `categoria`, `precio`, `cliente`) VALUES
-(1, 'helado', 'servido', 2999.99, 1),
-(2, 'torta helada', 'postres', 4999.99, 2),
-(3, 'helado', 'envasado', 2999.99, 3),
-(4, 'cucurucho', 'otros', 499.99, 1),
-(5, 'helado', 'envasado', 2999.99, 3);
+INSERT INTO `categorias` (`id_categoria`, `nombre_categoria`) VALUES
+(2, 'servido'),
+(3, 'tortas'),
+(4, 'otros'),
+(5, 'bombones'),
+(15, 'palitos');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `nombres`
+-- Estructura de tabla para la tabla `pedidos`
 --
 
-CREATE TABLE `nombres` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(255) NOT NULL,
-  `apellido` varchar(255) NOT NULL,
-  `edad` int(11) NOT NULL
+CREATE TABLE `pedidos` (
+  `id_pedido` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `producto` varchar(255) NOT NULL,
+  `categoria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `nombres`
+-- Volcado de datos para la tabla `pedidos`
 --
 
-INSERT INTO `nombres` (`id`, `nombre`, `apellido`, `edad`) VALUES
-(1, 'Agustin', 'gutierrez', 21),
-(2, 'Garfio', 'ramirez', 23),
-(3, 'Luca', 'garcia', 22),
-(4, 'Agustin', 'rebord', 23),
-(5, 'Luca', 'fonseca', 34);
+INSERT INTO `pedidos` (`id_pedido`, `id_producto`, `producto`, `categoria`) VALUES
+(3, 3, 'Cucurucho', 4),
+(4, 4, 'Bombon Escoces', 5),
+(49, 11, 'Helado', 2),
+(50, 4, 'Bombon Escoces', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `producto`
+--
+
+CREATE TABLE `producto` (
+  `id_productos` int(11) NOT NULL,
+  `nombre_producto` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`id_productos`, `nombre_producto`) VALUES
+(3, 'Cucurucho'),
+(4, 'Bombon Escoces'),
+(11, 'Helado'),
+(12, 'Bombon Suizo'),
+(13, 'Torta Oreo'),
+(14, 'Torta Milka');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL,
+  `userName` varchar(20) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `userName`, `password`) VALUES
+(1, 'webadmin', '$2y$10$RA5Zd4yv4r59dVLVkV9JEe.TGOHtiiWITCE.TfTpidKvWt409v4QW');
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `datos_producto`
+-- Indices de la tabla `categorias`
 --
-ALTER TABLE `datos_producto`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `cliente` (`cliente`);
+ALTER TABLE `categorias`
+  ADD PRIMARY KEY (`id_categoria`);
 
 --
--- Indices de la tabla `nombres`
+-- Indices de la tabla `pedidos`
 --
-ALTER TABLE `nombres`
+ALTER TABLE `pedidos`
+  ADD PRIMARY KEY (`id_pedido`),
+  ADD KEY `categoria` (`categoria`),
+  ADD KEY `id_producto` (`id_producto`);
+
+--
+-- Indices de la tabla `producto`
+--
+ALTER TABLE `producto`
+  ADD PRIMARY KEY (`id_productos`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+
+--
+-- AUTO_INCREMENT de la tabla `producto`
+--
+ALTER TABLE `producto`
+  MODIFY `id_productos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `datos_producto`
+-- Filtros para la tabla `pedidos`
 --
-ALTER TABLE `datos_producto`
-  ADD CONSTRAINT `datos_producto_ibfk_1` FOREIGN KEY (`cliente`) REFERENCES `nombres` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `pedidos`
+  ADD CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`categoria`) REFERENCES `categorias` (`id_categoria`),
+  ADD CONSTRAINT `pedidos_ibfk_2` FOREIGN KEY (`categoria`) REFERENCES `categorias` (`id_categoria`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pedidos_ibfk_3` FOREIGN KEY (`categoria`) REFERENCES `categorias` (`id_categoria`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pedidos_ibfk_4` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_productos`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
