@@ -14,6 +14,8 @@ class productController{
     }
 
     function showProduct($id){
+        AuthHelper::verify();
+
         $producto = $this->model->getProduct($id);
         $categoria = $this->modelCategory->getCategory($id);
         $this->view->showProduct($producto, $categoria);

@@ -14,6 +14,7 @@ class helaController{
     private $modelProduct;
 
     function __construct(){
+        
         $this->view = new helaView(); 
         $this->model = new helaModel();
         $this->modelCategory = new categoryModel();

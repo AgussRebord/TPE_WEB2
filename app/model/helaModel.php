@@ -1,12 +1,13 @@
 <?php
 
+require_once 'config.php'; 
 class helaModel {
 
     private $db;
 
     function __construct(){
         //1.  abro conexión
-        $this->db = new PDO('mysql:host=localhost;'.'dbname=tpe_heladeria;charset=utf8', 'root', '');
+        $this->db = new PDO('mysql:host='.MYSQL_HOST.';dbname='. MYSQL_DB .';charset=utf8', MYSQL_USER, MYSQL_PASS);
     }
 
     function getPedidos(){

@@ -21,7 +21,6 @@ class AuthHelper {
 
     public static function verify() {
         AuthHelper::init();
-        var_dump($_SESSION);
         if (!isset($_SESSION['USER_ID'])) {
             header('Location: ' . BASE_URL . '/login');
             die();

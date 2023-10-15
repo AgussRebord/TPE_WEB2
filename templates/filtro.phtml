@@ -5,8 +5,7 @@
         <tr>
             <th>id</th>
             <th>producto</th>
-            <th>id_categoria</th>
-            <th>Detalle Producto</th>           
+            <th>id_categoria</th>        
         </tr>
     </thead>
 
@@ -19,10 +18,7 @@
             <tr>
                 <td><?= $pedido->id_producto ?></td>                    
                 <td><?= $pedido->producto ?></td> 
-                <td><?= $pedido->categoria ?></td>
-                <td><a href="detailProduct/<?= $pedido->id_producto?>" >Detalle</a></td>   
-                <td><a href="delete/<?= $pedido->id_producto ?>" type="button" class='btn btn-danger ml-auto'>Borrar</a></td>
-                <td><a href="edit/">Editar</a></td>                      
+                <td><?= $pedido->categoria ?></td>                 
             </tr>
         </tbody>
     <?php endforeach ?>

@@ -5,6 +5,7 @@ class categoryController{
     private $view;
     private $model;
     function __construct(){
+        AuthHelper::verify();
         $this->view = new helaView();
         $this->model = new categoryModel();
     }
