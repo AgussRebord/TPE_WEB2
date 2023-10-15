@@ -14,7 +14,6 @@ class helaController{
     private $modelProduct;
 
     function __construct(){
-        AuthHelper::verify();
         $this->view = new helaView(); 
         $this->model = new helaModel();
         $this->modelCategory = new categoryModel();
@@ -29,10 +28,19 @@ class helaController{
     }
 
     function show(){
+        AuthHelper::init();
+
         $productos = $this->modelProduct->getProductAll();
         $pedidos = $this->model->getPedidos();
         $categorias = $this->modelCategory->getCategoryAll();
         $this->view->showHome($pedidos, $categorias, $productos);
+    }
+    function showAdmin(){
+        AuthHelper::verify();
+        $productos = $this->modelProduct->getProductAll();
+        $pedidos = $this->model->getPedidos();
+        $categorias = $this->modelCategory->getCategoryAll();
+        $this->view->showHomeAdmin($pedidos, $categorias, $productos);
     }
     function calcularPrecio(){
         $categoria = $_POST['categoria'];
@@ -57,6 +65,8 @@ class helaController{
     }
 
     function addPedidos(){
+        
+
         $producto = $_POST['producto'];
         $categoria = $_POST['categoria'];
 
@@ -65,7 +75,7 @@ class helaController{
         }
         $id = $this->model->insertPedidos($producto,$categoria);
         if ($id) {
-            header('Location: ' . BASE_URL);
+            header('Location: ' . BASE_URL . 'homeAdmin');
         } else {
             $this->view->showError("Error al insertar el pedido");
         }
@@ -73,11 +83,13 @@ class helaController{
 
     function removePedido($id) {
 
+
         $this->model->deletePedido($id);
-        header('Location: ' . BASE_URL);     
+        header('Location: ' . BASE_URL . 'homeAdmin');
     }
 
     function editPedido(){
+
         $id_pedido = $_POST['id_pedido']; 
         $producto = $_POST['producto'];
         $id_producto = $_POST['id_producto']; 
@@ -89,7 +101,7 @@ class helaController{
         } else {
             $this->model->updatePedido($id_pedido, $producto, $id_producto , $categoria);
         } 
-        header('Location: ' . BASE_URL);
+        header('Location: ' . BASE_URL . 'homeAdmin');
     }    
 
 }

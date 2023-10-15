@@ -19,7 +19,7 @@ class categoryController{
     
     function removeCategory($id){
         $this->model->deleteCategory($id);
-        header('Location: ' . BASE_URL);
+        header('Location: ' . BASE_URL . 'homeAdmin');
     }
     
     function addCategory(){
@@ -30,7 +30,7 @@ class categoryController{
         }
         $id = $this->model->insertCategory($nombre_categoria);
         if ($id) {
-            header('Location: ' . BASE_URL);
+            header('Location: ' . BASE_URL . 'homeAdmin');
         } else {
             $this->view->showError("Error al insertar el pedido");
         } 
@@ -46,7 +46,7 @@ class categoryController{
         } else {
             $id = $this->model->updateCategory($nombre_categoria, $categoria_id);
         } 
-        header('Location: ' . BASE_URL);
+        header('Location: ' . BASE_URL . 'homeAdmin');
     }
 
 }

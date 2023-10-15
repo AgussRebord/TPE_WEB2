@@ -13,6 +13,12 @@ class helaView{
         require './templates/productos.phtml';
 
     }
+    function showHomeAdmin($pedidos, $categorias, $productos){ 
+        require './templates/pedidosAdmin.phtml';
+        require './templates/categoriasAdmin.phtml';
+        require './templates/productosAdmin.phtml';
+
+    }
     function showCategory($categoria){
         require './templates/categoria.phtml';
     }

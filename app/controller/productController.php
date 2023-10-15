@@ -21,11 +21,13 @@ class productController{
     }
     
     function removeProduct($id){
+
         $this->model->deleteProduct($id);
-        header('Location: ' . BASE_URL);
+        header('Location: ' . BASE_URL . 'homeAdmin');
     }
     
     function addProduct(){
+
         $nombre_producto = $_POST['nombre_producto'];
 
         if( empty($nombre_producto)){
@@ -33,7 +35,7 @@ class productController{
         }
         $id = $this->model->insertProduct($nombre_producto);
         if ($id) {
-            header('Location: ' . BASE_URL);
+            header('Location: ' . BASE_URL . 'homeAdmin');
         } else {
             $this->view->showError("Error al insertar el pedido");
         } 
@@ -50,7 +52,7 @@ class productController{
         } else {
             $id = $this->model->updateProduct($nombre_producto, $producto_id);
         } 
-        header('Location: ' . BASE_URL);
+        header('Location: ' . BASE_URL . 'homeAdmin');
 
          
     }

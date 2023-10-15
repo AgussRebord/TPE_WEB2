@@ -6,5 +6,4 @@ Nombre: Lucas Agustin Garcia
 email: tfchook@hotmail.com
 Tematica TPE: 
 Nosostros vamos a hacer una pagina de venta de productos de heladeria,
-que en su base de datos va a tener un id, producto,categoria, precio y cliente.
-Y el cliente incluye id, nombre, apellido, edad. 
+que en su base de datos va a tener un id, producto, precio y cliente.

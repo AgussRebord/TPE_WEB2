@@ -32,7 +32,7 @@ class AuthController {
             
             AuthHelper::login($user);
             
-            header('Location: ' . BASE_URL);
+            header('Location: ' . BASE_URL . 'homeAdmin');
         } else {
             $this->view->showLogin('Usuario inválido');
         }

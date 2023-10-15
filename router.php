@@ -18,6 +18,10 @@ switch ($params[0]) { // en la primer posicion tengo la accion real
         $controller = new helaController();
         $controller->show(); // muestra todas las noticias
         break;
+    case 'homeAdmin':
+        $controller = new helaController();
+        $controller->showAdmin(); // muestra todas las noticias
+        break;
     case 'addPedido':
         $controller = new helaController();
         $controller->addPedidos();
