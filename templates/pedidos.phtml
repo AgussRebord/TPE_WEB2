@@ -19,7 +19,6 @@
     <thead>
         <tr>
             <th>Id del pedido</th>
-            <th>Id del Producto</th>
             <th>Producto</th>
             <th>Categoria</th>
             <th>Detalle Producto</th>           
@@ -30,8 +29,7 @@
     <?php foreach($pedidos as $pedido): ?> 
         <tbody>
             <tr>
-                <td><?= $pedido->id_pedido ?></td>
-                <td><?= $pedido->id_producto ?></td>                    
+                <td><?= $pedido->id_pedido ?></td>                    
                 <td><?= $pedido->producto ?></td> 
                 <td><?= $pedido->nombre_categoria?></td>
                 <td><a href="detailProduct/<?= $pedido->id_producto?>" >Detalle</a></td>   

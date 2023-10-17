@@ -63,6 +63,13 @@ class helaModel {
             ADD CONSTRAINT `pedidos_ibfk_3` FOREIGN KEY (`categoria`) REFERENCES `categorias` (`id_categoria`) ON DELETE CASCADE ON UPDATE CASCADE,
             ADD CONSTRAINT `pedidos_ibfk_4` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_productos`) ON DELETE CASCADE ON UPDATE CASCADE;
             COMMIT;
+            INSERT INTO `producto` (`id_productos`, `nombre_producto`) VALUES
+            (1, 'Bombon Suizo'),
+            (2, 'Torta Oreo'),
+            (3, 'Torta Milka'),
+            (4, 'Cucurucho'),
+            (5, 'palito bombon'),
+            (23, 'Helado');
             INSERT INTO `categorias` (`id_categoria`, `nombre_categoria`) VALUES
             (2, 'servido'),
             (3, 'tortas'),
@@ -75,13 +82,6 @@ class helaModel {
             (3, 2, 'Torta Oreo', 3),
             (4, 4, 'Cucurucho', 4),
             (523, 23, 'Helado', 2);
-            INSERT INTO `producto` (`id_productos`, `nombre_producto`) VALUES
-            (1, 'Bombon Suizo'),
-            (2, 'Torta Oreo'),
-            (3, 'Torta Milka'),
-            (4, 'Cucurucho'),
-            (5, 'palito bombon'),
-            (23, 'Helado');
             INSERT INTO `usuarios` (`id`, `userName`, `password`) VALUES
             (1, 'webadmin', '$hashedPassword');
             END;   
