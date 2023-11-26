@@ -1,0 +1,15 @@
+<?php require_once './templates/header.phtml' ?>
+
+<label for="">La categoria a editar es:</label>
+<ul>
+    <li>Categoria: <?= $categoria->nombre_categoria ?></li>
+    
+</ul>
+<form method="post" action="actualizarCategory/<?=$id_categoria?>">
+    <label for="">Ingrese la categoria que desea</label>
+    <input type="text" name="nombre_categoria" id="nombre_categoria">
+    <button type="submit">Editar</button>
+        
+</form>
+
+<?php require 'templates/footer.phtml' ?>

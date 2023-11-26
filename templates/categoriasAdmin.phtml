@@ -1,6 +1,12 @@
 <?php require_once './templates/header.phtml' ?>
 
 
+<form method="post" action="addCategory">
+    <label for="">Ingrese la categoria que desea</label>
+    <input type="text" name="nombre_categoria" id="nombre_categoria">
+    <button type="submit">AGREGAR</button>
+    
+</form>
 <table class="table table-striped table-hover">
     <thead>
         <tr>
@@ -21,24 +27,12 @@
                 <td><?= $categoria->nombre_categoria ?></td> 
                 <td><a href="detailCategory/<?= $categoria->id_categoria?>" ><?= $categoria->nombre_categoria ?></a></td>
                 <td><a href="deleteCategory/<?= $categoria->id_categoria ?>" type="button" class='btn btn-danger ml-auto'>Borrar</a></td>
+                <td><a href="editCategory/<?= $categoria->id_categoria ?>" type="button" class='btn btn-danger ml-auto'>Editar</a></td>
+
             </tr>
         </tbody>
         <?php endforeach ?>
         
     </table>
-    
-    
-    <form method="post" action="addCategory">
-        <label for="">Ingrese la categoria que desea</label>
-        <input type="text" name="nombre_categoria" id="nombre_categoria">
-        <button type="submit">AGREGAR</button>
-        
-    </form>
-    <form method="post" action="editCategory">
-        <label for="">Ingrese el ID de la categoria que desea editar</label>
-        <input type="text" id="categoria_id" name="categoria_id">
-        <label for="">Ingrese la categoria que desea</label>
-        <input type="text" name="nombre_categoria" id="nombre_categoria">
-        <button type="submit">Editar</button>
-        
-    </form>
+
+<?php require 'templates/footer.phtml' ?>

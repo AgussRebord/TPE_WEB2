@@ -1,0 +1,15 @@
+<?php require_once './templates/header.phtml' ?>
+
+
+<label for="">El producto a editar es:</label>
+<ul>
+    <li>Producto: <?= $producto->nombre_producto ?></li>    
+</ul>
+<form method="post" action="actualizarProduct/<?=$id_producto?>">
+    <label for="">Ingrese el producto que desea</label>
+    <input type="text" name="nombre_producto" id="nombre_producto">
+    <button type="submit">Editar</button>
+        
+</form>
+
+<?php require 'templates/footer.phtml' ?>

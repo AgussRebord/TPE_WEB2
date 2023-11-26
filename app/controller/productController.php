@@ -1,20 +1,30 @@
 <?php
     require_once './app/model/productModel.php';
     require_once './app/model/categoryModel.php';
-    require_once './app/view/helaView.php';
+    require_once './app/view/productView.php';
 class productController{ 
     
     private $view;
     private $model;
     private $modelCategory;
     function __construct(){
-        $this->view = new helaView(); 
+        $this->view = new productView(); 
         $this->model = new productModel();
         $this->modelCategory = new categoryModel();
     }
 
+    function showProductAll(){
+        AuthHelper::init();
+
+        $productos = $this->model->getProductAll();
+        if(AuthHelper::checkLogin()){
+            $this->view->showProductsAdmin($productos);
+        }else{
+            $this->view->showProducts($productos);
+        }
+    }
     function showProduct($id){
-        AuthHelper::verify();
+        AuthHelper::init();
 
         $producto = $this->model->getProduct($id);
         $categoria = $this->modelCategory->getCategory($id);
@@ -23,12 +33,14 @@ class productController{
     }
     
     function removeProduct($id){
+        AuthHelper::verify();
 
         $this->model->deleteProduct($id);
-        header('Location: ' . BASE_URL . 'homeAdmin');
+        header('Location: ' . BASE_URL . 'showProduct');
     }
     
     function addProduct(){
+        AuthHelper::verify();
 
         $nombre_producto = $_POST['nombre_producto'];
 
@@ -37,26 +49,26 @@ class productController{
         }
         $id = $this->model->insertProduct($nombre_producto);
         if ($id) {
-            header('Location: ' . BASE_URL . 'homeAdmin');
+            header('Location: ' . BASE_URL . 'showProduct');
         } else {
             $this->view->showError("Error al insertar el pedido");
         } 
     }
 
-    function editProduct(){
+    function editProduct($id_producto){
+        AuthHelper::verify();
+        $producto = $this->model->getProduct($id_producto);
+ 
+        $this->view->editProduct($id_producto, $producto);
 
-        $nombre_producto = $_POST['nombre_producto'];
-        $producto_id = $_POST['producto_id'];
-
+    }
         
-        if (empty($nombre_producto) || empty($producto_id)) {
-            $this->view->showError("Hay campos obligatorios sin completar");
-        } else {
-            $id = $this->model->updateProduct($nombre_producto, $producto_id);
-        } 
-        header('Location: ' . BASE_URL . 'homeAdmin');
+    function updateProduct($id_producto){
+        AuthHelper::verify();
+        $nombre_producto = $_POST['nombre_producto'];
 
-         
+        $this->model->updateProduct($nombre_producto,$id_producto);
+        header('Location: ' . BASE_URL .'showProduct');
     }
 
 

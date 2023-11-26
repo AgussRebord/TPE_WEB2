@@ -5,7 +5,7 @@
     <label for="">Ingrese el producto que desea</label>
     <select name="producto" id="producto">
         <?php foreach ($productos as $producto){ ?>
-            <option value="<?= $producto->nombre_producto ?>"><?= $producto->nombre_producto ?></option>
+            <option value="<?= $producto->id_producto ?>"><?= $producto->nombre_producto ?></option>
         <?php } ?>
     </select>   
     <select name="categoria" id="categoria">
@@ -19,10 +19,6 @@
     <button type="submit">COMPRAR</button>
     
 </form>
-
-<?php 
-?>
-
 
 <form method="post" action="filtro">
     <label for="">FILTRAR POR CATEGORIA</label>
@@ -61,20 +57,13 @@
                 <td><?= $pedido->nombre_categoria ?></td>
                 <td><a href="detailProduct/<?= $pedido->id_producto?>" >Detalle</a></td>   
                 <td><a href="deletePedido/<?= $pedido->id_producto ?>" type="button" class='btn btn-danger ml-auto'>Borrar</a></td>
+                <td><a href="editPedido/<?= $pedido->id_pedido ?>" type="button" class='btn btn-danger ml-auto'>Editar</a></td>
+
             </tr>
         </tbody>
     <?php endforeach ?>
     
 </table>
-<form method="post" action="editPedido">
-    <label for="">Ingrese el ID del pedido que desea editar</label>
-    <input type="text" id="id_pedido" name="id_pedido">
-    <label for="">Ingrese El ID del producto al que desea cambiar</label>
-    <input type="text" name="id_producto" id="id_producto">
-    <label for="">Ingrese el producto que desea</label>
-    <input type="text" name="producto" id="producto">
-    <label for="">Ingrese la categoria que desea</label>
-    <input type="text" name="categoria" id="categoria">
-    <button type="submit">Editar</button>
-    
-</form>
+
+
+<?php require 'templates/footer.phtml' ?>

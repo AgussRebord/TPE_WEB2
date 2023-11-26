@@ -1,0 +1,29 @@
+<?php require_once './templates/header.phtml' ?>
+
+<label for="">El pedido a editar es:</label>
+<ul>
+    <li>Producto: <?= $pedido->producto ?></li>
+    <li>Categoria: <?= $pedido->nombre_categoria ?></li>
+    
+</ul>
+<form method="post" action="actualizarPedido/<?= $pedido->id_pedido ?>">
+
+    <label for="">Ingrese el Pedido</label>
+    <select name="producto" id="producto">
+        <?php foreach ($productos as $producto){ ?>
+            <option value="<?= $producto->id_producto ?>"><?= $producto->nombre_producto ?></option>
+        <?php } ?>
+    </select>   
+    <select name="categoria" id="categoria">
+        <?php foreach($categorias as $categoria){ ?>
+            
+            <option value="<?= $categoria->id_categoria ?>"><?= $categoria->nombre_categoria ?></option>
+
+        <?php } ?>
+    </select>   
+
+    <button type="submit">EDITAR</button>
+    
+</form>
+
+<?php require 'templates/footer.phtml' ?>

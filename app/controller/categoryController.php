@@ -1,17 +1,28 @@
 <?php
 require_once './app/model/categoryModel.php';
-require_once './app/view/helaView.php';
+require_once './app/view/categoryView.php';
 class categoryController{
     private $view;
     private $model;
     function __construct(){
-        AuthHelper::verify();
-        $this->view = new helaView();
+        AuthHelper::init();
+        $this->view = new categoryView();
         $this->model = new categoryModel();
     }
 
 
+    function showCategoryAll(){
+
+        $categorias = $this->model->getCategoryAll();
+        if(AuthHelper::checkLogin()){
+            $this->view->showCategorysAdmin($categorias);
+        }else{
+            $this->view->showCategorys($categorias);
+        }
+
+    }
     function showCategory($id){
+
         $categoria = $this->model->getCategory($id);
         
         $this->view->showCategory($categoria);
@@ -19,11 +30,15 @@ class categoryController{
     }
     
     function removeCategory($id){
+        AuthHelper::verify();
+
         $this->model->deleteCategory($id);
-        header('Location: ' . BASE_URL . 'homeAdmin');
+        header('Location: ' . BASE_URL . 'showCategory');
     }
     
     function addCategory(){
+        AuthHelper::verify();
+
         $nombre_categoria = $_POST['nombre_categoria'];
 
         if( empty($nombre_categoria)){
@@ -31,24 +46,28 @@ class categoryController{
         }
         $id = $this->model->insertCategory($nombre_categoria);
         if ($id) {
-            header('Location: ' . BASE_URL . 'homeAdmin');
+            header('Location: ' . BASE_URL . 'showCategory');
         } else {
             $this->view->showError("Error al insertar el pedido");
         } 
     }
     
-    function editCategory(){
-        $nombre_categoria = $_POST['nombre_categoria'];
-        $categoria_id = $_POST['categoria_id'];
+    function editCategory($id_categoria){
+        AuthHelper::verify();
+        $categoria = $this->model->getCategory($id_categoria);
+ 
+        $this->view->editCategory($id_categoria, $categoria);
 
-        
-        if (empty($nombre_categoria) || empty($categoria_id)) {
-            $this->view->showError("Hay campos obligatorios sin completar");
-        } else {
-            $id = $this->model->updateCategory($nombre_categoria, $categoria_id);
-        } 
-        header('Location: ' . BASE_URL . 'homeAdmin');
     }
+        
+    function updateCategory($id_categoria){
+        AuthHelper::verify();
+        $nombre_categoria = $_POST['nombre_categoria'];
+
+        $this->model->updateCategory($nombre_categoria,$id_categoria);
+        header('Location: ' . BASE_URL .'showCategory');
+    }
+
 
 }
 ?>

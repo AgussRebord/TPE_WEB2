@@ -3,9 +3,10 @@
 <table class="table table-striped table-hover">
     <thead>
         <tr>
-            <th>id</th>
-            <th>producto</th>
-            <th>id_categoria</th>        
+            <th>Id</th>
+            <th>Producto</th>
+            <th>Nombre Categoria</th>
+            <th>id Categoria</th>        
         </tr>
     </thead>
 
@@ -17,8 +18,10 @@
         <tbody>
             <tr>
                 <td><?= $pedido->id_producto ?></td>                    
-                <td><?= $pedido->producto ?></td> 
-                <td><?= $pedido->categoria ?></td>                 
+                <td><?= $pedido->producto ?></td>
+                <td><?= $pedido->nombre_categoria ?></td>
+                <td><?= $pedido->categoria ?></td>
+
             </tr>
         </tbody>
     <?php endforeach ?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-10-2023 a las 18:48:22
+-- Tiempo de generación: 26-11-2023 a las 03:18:19
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -65,30 +65,32 @@ INSERT INTO `pedidos` (`id_pedido`, `id_producto`, `producto`, `categoria`) VALU
 (2, 3, 'Torta Milka', 3),
 (3, 2, 'Torta Oreo', 3),
 (4, 4, 'Cucurucho', 4),
-(523, 23, 'Helado', 2);
+(524, 4, 'Cucurucho', 2),
+(530, 5, 'palito bombon', 6),
+(531, 29, 'Helado', 2);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `producto`
+-- Estructura de tabla para la tabla `productos`
 --
 
-CREATE TABLE `producto` (
-  `id_productos` int(11) NOT NULL,
+CREATE TABLE `productos` (
+  `id_producto` int(11) NOT NULL,
   `nombre_producto` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `producto`
+-- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `producto` (`id_productos`, `nombre_producto`) VALUES
+INSERT INTO `productos` (`id_producto`, `nombre_producto`) VALUES
 (1, 'Bombon Suizo'),
 (2, 'Torta Oreo'),
 (3, 'Torta Milka'),
 (4, 'Cucurucho'),
 (5, 'palito bombon'),
-(23, 'Helado');
+(29, 'Helado');
 
 -- --------------------------------------------------------
 
@@ -107,7 +109,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `userName`, `password`) VALUES
-(1, 'webadmin', '$2y$10$RA5Zd4yv4r59dVLVkV9JEe.TGOHtiiWITCE.TfTpidKvWt409v4QW');
+(1, 'webadmin', '$2y$10$2BLx6DjkTNRWDWOrypGqtOmsNRdWlj7Wmij3XJSzMYcFF5onhSb2e');
 
 --
 -- Índices para tablas volcadas
@@ -128,10 +130,10 @@ ALTER TABLE `pedidos`
   ADD KEY `id_producto` (`id_producto`);
 
 --
--- Indices de la tabla `producto`
+-- Indices de la tabla `productos`
 --
-ALTER TABLE `producto`
-  ADD PRIMARY KEY (`id_productos`);
+ALTER TABLE `productos`
+  ADD PRIMARY KEY (`id_producto`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -147,19 +149,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=524;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=532;
 
 --
--- AUTO_INCREMENT de la tabla `producto`
+-- AUTO_INCREMENT de la tabla `productos`
 --
-ALTER TABLE `producto`
-  MODIFY `id_productos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+ALTER TABLE `productos`
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -178,7 +180,7 @@ ALTER TABLE `pedidos`
   ADD CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`categoria`) REFERENCES `categorias` (`id_categoria`),
   ADD CONSTRAINT `pedidos_ibfk_2` FOREIGN KEY (`categoria`) REFERENCES `categorias` (`id_categoria`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `pedidos_ibfk_3` FOREIGN KEY (`categoria`) REFERENCES `categorias` (`id_categoria`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `pedidos_ibfk_4` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_productos`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `pedidos_ibfk_4` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
